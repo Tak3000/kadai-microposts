@@ -1,0 +1,12 @@
+
+<% if current_user.liking?(like) %>
+  <%= form_for(current_user.likes.find_by(like_id: like.id), html: { method: :delete }) do |f| %>
+    <%= hidden_field_tag :like_id, like.id %>
+    <%= f.submit 'Unlike', class: 'btn btn-danger btn-xs' %>
+  <% end %>
+<% else %>
+  <%= form_for(current_user.likes.build) do |f| %>
+    <%= hidden_field_tag :like_id, like.id %>
+    <%= f.submit 'Like', class: 'btn btn-primary btn-xs' %>
+  <% end %>
+<% end %>
